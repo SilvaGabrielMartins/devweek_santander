@@ -1,6 +1,8 @@
 package com.projeto.bootcamp.controller;
 
 import com.projeto.bootcamp.model.dto.StockDTO;
+import com.projeto.bootcamp.service.StockService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/stock")
 public class StockController {
+
+    @Autowired
+    StockService service;
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO> save(@Valid @RequestBody StockDTO dto){
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(service.save(dto));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
