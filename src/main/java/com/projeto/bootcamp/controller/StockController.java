@@ -31,38 +31,11 @@ public class StockController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StockDTO>> findAll(){
-        List<StockDTO> lista = new ArrayList<>();
-        StockDTO dto = new StockDTO();
-        dto.setId(1L);
-        dto.setName("Microsoft");
-        dto.setPrice(2000.0);
-        dto.setVariation(100.0);
-        dto.setDate(LocalDate.now());
-        lista.add(dto);
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO> findById(@PathVariable Long id){
-        List<StockDTO> lista = new ArrayList<>();
-        StockDTO dto = new StockDTO();
-        dto.setId(1L);
-        dto.setName("Microsoft");
-        dto.setPrice(2000.0);
-        dto.setVariation(100.0);
-        dto.setDate(LocalDate.now());
-
-        StockDTO dto2 = new StockDTO();
-        dto2.setId(2L);
-        dto2.setName("Ifood");
-        dto2.setPrice(1000.0);
-        dto2.setVariation(150.0);
-        dto2.setDate(LocalDate.now());
-
-        lista.add(dto);
-        lista.add(dto2);
-
-        StockDTO selecionado = lista.stream().filter(x -> x.getId().compareTo(id) == 0).findFirst().get();
-        return ResponseEntity.ok(selecionado);
+        return ResponseEntity.ok(service.findById(id));
     }
 }
